@@ -18,7 +18,7 @@ Using the `--geojson <output-location>` command line argument, the list can be s
 
 Using the `--map <output-location>` command line argument, a simple Leaflet map is made to visualize the locations of the returned points.
 
-![docs/map-example.png]
+![Example of map visualization](docs/map-example.png)
 
 Multiple types of output can be generated. For example, the following command will search for Instagram locations, save the JSON list, a GeoJSON file, and a map for viewing the locations visually.
 
