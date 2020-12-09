@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-This Python application requires `requests` and `numpy` to be properly installed.
+This Python application requires `requests` and `numpy` to be properly installed. This can be done with `pip3 install requests numpy`.
 
 ## Example usage
 
@@ -25,3 +25,13 @@ Multiple types of output can be generated. For example, the following command wi
 ```python3 instagram-locations.py --session "3888090946%3AhdKd2fA8d72dqD%3A16" --lat 32.22 --lng -110.97 --json locs.json --geojson locs.geojson --map map.html```
 
 ## Getting an Instagram session ID
+
+__Important: an Instagram session ID should be treated like a password — it provides full access to the Instagram account. Using this session ID in multiple places or on multiple computers may trigger Instagram to invalidate all session IDs. Using this session ID for any purpose other than the official Instagram website or application may be a violation of the Instagram Terms of Service and could lead to account suspension.__
+
+1. In Google Chrome, log-in to Instagram.
+2. Right click on the page and press "Inspect" to bring up the Chrome Developer Tools.
+3. Click the "Application" tab in the Developer Tools Box.
+4. Under "Cookies" select "https://www.instagram.com."
+5. The value next to "sessionid" is your Instagram session ID.
+
+![Finding the Instagram cookie](docs/cookies.jpg)
