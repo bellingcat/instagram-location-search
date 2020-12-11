@@ -14,15 +14,17 @@ Note that this requires an Instagram session ID in order to work! See below for 
 
 ### Other output formats
 
+Using the `--csv <output-location>` command line argument, the list can be saved as a CSV file.
+
 Using the `--geojson <output-location>` command line argument, the list can be saved as a GeoJSON file for other geospatial applications.
 
 Using the `--map <output-location>` command line argument, a simple Leaflet map is made to visualize the locations of the returned points.
 
 ![Example of map visualization](docs/map-example.png)
 
-Multiple types of output can be generated. For example, the following command will search for Instagram locations, save the JSON list, a GeoJSON file, and a map for viewing the locations visually.
+Multiple types of output can be generated. For example, the following command will search for Instagram locations, save the JSON list, a CSV file, and a map for viewing the locations visually.
 
-```python3 instagram-locations.py --session "3888090946%3AhdKd2fA8d72dqD%3A16" --lat 32.22 --lng -110.97 --json locs.json --geojson locs.geojson --map map.html```
+```python3 instagram-locations.py --session "3888090946%3AhdKd2fA8d72dqD%3A16" --lat 32.22 --lng -110.97 --json locs.json --csv locs.csv --map map.html```
 
 ## Getting an Instagram session ID
 

@@ -1,5 +1,6 @@
 import requests
 import numpy as np
+import pandas as pd
 import argparse
 import json
 from string import Template
@@ -117,6 +118,7 @@ def main():
     parser.add_argument("--json", action="store", dest="output")
     parser.add_argument("--geojson", action="store", dest="geojson")
     parser.add_argument("--map", action="store", dest="map")
+    parser.add_argument("--csv", action="store", dest="csv")
     parser.add_argument("--lat", action="store", dest="lat")
     parser.add_argument("--lng", action="store", dest="lng")
 
@@ -139,6 +141,11 @@ def main():
         f = open(args.map, 'w')
         f.write(viz)
         f.close()
+
+    if (args.csv):
+        df = pd.DataFrame(locations)
+        df['url'] = df['external_id'].apply(lambda v: 'https://www.instagram.com/explore/locations/' + str(v))
+        df.to_csv(args.csv)
 
 if __name__ == "__main__":
     main()
