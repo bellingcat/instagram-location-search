@@ -6,15 +6,15 @@ This Python application requires `requests` and `numpy` to be properly installed
 
 ## Example usage
 
-The following command will search for Instagram locations nearby the coordinates 32.22 N, 110.97 W (downtown Tucson, Arizona.) The list of locations is saved as a JSON file at "locs.json".
+The following command will search for Instagram locations nearby the coordinates 32.22 N, 110.97 W (downtown Tucson, Arizona.) The list of locations is saved as a CSV file at "locs.csv".
 
-```python3 instagram-locations.py --session "<session-id-token>" --lat 32.22 --lng -110.97 --json locs.json```
+```python3 instagram-locations.py --session "<session-id-token>" --lat 32.22 --lng -110.97 --csv locs.csv```
 
 Note that this requires an Instagram session ID in order to work! See below for how to obtain one from your account.
 
 ### Other output formats
 
-Using the `--csv <output-location>` command line argument, the list can be saved as a CSV file.
+Using the `--json <output-location>` command line argument, the list can be saved as a JSON file, almost identical to the raw API response.
 
 Using the `--geojson <output-location>` command line argument, the list can be saved as a GeoJSON file for other geospatial applications.
 
