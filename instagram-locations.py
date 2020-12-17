@@ -124,7 +124,7 @@ html_template = '''<html>
       }).addTo(map);
 
       function onEachFeature(feature, layer) {
-        layer.bindPopup(`<a href="https://www.instagram.com/explore/locations/` + feature.properties.external_id + `$date_var">` + feature.properties.name + `</a><br />` + feature.properties.address );
+        layer.bindPopup(`<a href="https://www.instagram.com/explore/locations/` + feature.properties.external_id + `$date_var" target="_blank">` + feature.properties.name + `</a><br />` + feature.properties.address );
       }
 
       L.geoJSON(locs, {
