@@ -102,6 +102,10 @@ html_template = '''<html>
         width: 100%;
         height: 600px;
       }
+      img.selected-location {
+        filter: hue-rotate(120deg);
+        z-index: 999 !important;
+      }
     </style>
   </head>
   <body>
@@ -126,6 +130,9 @@ html_template = '''<html>
       L.geoJSON(locs, {
         onEachFeature: onEachFeature
       }).addTo(map);
+
+      var centerMarker = L.marker([$lat, $lng]).addTo(map);
+      centerMarker._icon.classList.add('selected-location');
     </script>
   </body>
 </html>'''
