@@ -4,6 +4,8 @@ import pandas as pd
 import argparse
 import json
 from string import Template
+from datetime import datetime, timezone
+import sys
 
 # gets instagram "locations" around a particular lat/lng using internal API
 #   (requires session cookie for authentication)
@@ -11,7 +13,6 @@ def get_instagram_locations(lat, lng, cookie):
     locs = requests.get("https://www.instagram.com/location_search/?latitude=" + str(lat) + "&longitude=" + str(lng) + "&__a=1", headers={
             'Cookie': cookie
         }).json()
-    
     return locs['venues']
 
 
@@ -54,6 +55,23 @@ def make_geojson(locs):
         features.append(feature)
 
     return {"type": "FeatureCollection", "features": features}
+
+def encode_date(date_str: str):
+    '''Convert date into Instagram "snowflake" ID'''
+    try:
+        date = datetime.strptime(date_str, '%Y-%m-%d')
+    except ValueError:
+        try:
+            date = datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            print('Unable to parse date. Please use format "yyyy-mm-dd".', file=sys.stderr)
+            sys.exit(1)
+    date = date.replace(hour=23, minute=59, second=59, tzinfo=timezone.utc)
+    date_ts = int(date.timestamp()) * 1000 # milliseconds
+    insta_epoch = date_ts - 1314220021300
+    max_id_num = insta_epoch << 23
+
+    return str(max_id_num)
 
 html_template = '''<html>
   <head>
@@ -102,7 +120,7 @@ html_template = '''<html>
       }).addTo(map);
 
       function onEachFeature(feature, layer) {
-        layer.bindPopup(`<a href="https://www.instagram.com/explore/locations/` + feature.properties.external_id + `">` + feature.properties.name + `</a><br />` + feature.properties.address );
+        layer.bindPopup(`<a href="https://www.instagram.com/explore/locations/` + feature.properties.external_id + `$date_var">` + feature.properties.name + `</a><br />` + feature.properties.address );
       }
 
       L.geoJSON(locs, {
@@ -121,10 +139,15 @@ def main():
     parser.add_argument("--csv", action="store", dest="csv")
     parser.add_argument("--lat", action="store", dest="lat")
     parser.add_argument("--lng", action="store", dest="lng")
+    parser.add_argument("--date", action="store", dest="date")
 
     args = parser.parse_args()
 
     cookie = 'sessionid=' + args.session
+
+    date_var = ''
+    if args.date is not None:
+        date_var = '?max_id=' + encode_date(args.date)
 
     locations = get_fuzzy_locations(float(args.lat), float(args.lng), cookie)
 
@@ -136,7 +159,7 @@ def main():
 
     if (args.map):
         s = Template(html_template)
-        viz = s.substitute(lat=args.lat, lng=args.lng, locs=json.dumps(make_geojson(locations)))
+        viz = s.substitute(lat=args.lat, lng=args.lng, locs=json.dumps(make_geojson(locations)), date_var=date_var)
 
         f = open(args.map, 'w')
         f.write(viz)
@@ -144,7 +167,7 @@ def main():
 
     if (args.csv):
         df = pd.DataFrame(locations)
-        df['url'] = df['external_id'].apply(lambda v: 'https://www.instagram.com/explore/locations/' + str(v))
+        df['url'] = df['external_id'].apply(lambda v: 'https://www.instagram.com/explore/locations/' + str(v) + date_var)
         df.to_csv(args.csv)
 
 if __name__ == "__main__":
