@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-This Python application requires `requests` and `numpy` to be properly installed. This can be done with `pip3 install requests numpy`.
+This Python application requires `requests`, `numpy`, and `pandas` to be properly installed. This can be done with `pip3 install requests numpy pandas`.
 
 ## Example usage
 
