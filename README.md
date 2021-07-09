@@ -35,6 +35,8 @@ Using the `--json <output-location>` command line argument, the list can be save
 
 Using the `--geojson <output-location>` command line argument, the list can be saved as a GeoJSON file for other geospatial applications.
 
+Using the `--ids <output-location>` command line argument, all the found location IDs are output, suitable to pass into another tool, like [instagram-scraper](https://github.com/arc298/instagram-scraper).
+
 Using the `--map <output-location>` command line argument, a simple Leaflet map is made to visualize the locations of the returned points.
 
 ![Example of map visualization](docs/map-example.png)
@@ -42,6 +44,33 @@ Using the `--map <output-location>` command line argument, a simple Leaflet map 
 Multiple types of output can be generated. For example, the following command will search for Instagram locations, save the JSON list, a CSV file, and a map for viewing the locations visually.
 
 ```python3 instagram-locations.py --session "3888090946%3AhdKd2fA8d72dqD%3A16" --lat 32.22 --lng -110.97 --json locs.json --csv locs.csv --map map.html```
+
+## Sample Usage with `instagram-scraper`
+The ID list generated with the `--ids` flag can be passed into `instagram-scraper` to pull down image metadata.
+
+### :rotating_light: Undocumented API :rotating_light:
+`instagram-scraper` relies on an undocumented API for the mobile apps. YMMV.
+
+First, get the proximal location IDs of your target location:
+```sh
+python3 instagram-locations.py --session "<session-id-token>" --lat <lat> --lng <lng> --ids location_ids.txt
+```
+
+Be sure to install `instagram-scraper`:
+```
+pip install instagram-scraper
+```
+
+Location scraping requires an authenticated request. Save your creds in a local file:
+```sh
+echo "-u=<your username>" >> creds.txt
+echo "-p=<your password>" >> creds.txt
+```
+
+Now use `instagram-scraper` to pull down all the photos at those locations:
+```sh
+instagram-scraper @creds.txt --filename @location_ids.txt --location --include-location --destination <output dir>
+```
 
 ## Getting an Instagram session ID
 
