@@ -147,6 +147,7 @@ def main():
     parser.add_argument("--lat", action="store", dest="lat")
     parser.add_argument("--lng", action="store", dest="lng")
     parser.add_argument("--date", action="store", dest="date")
+    parser.add_argument("--ids", action="store", dest="dump_ids")
 
     args = parser.parse_args()
 
@@ -176,7 +177,11 @@ def main():
         df = pd.DataFrame(locations)
         df['url'] = df['external_id'].apply(lambda v: 'https://www.instagram.com/explore/locations/' + str(v) + date_var)
         df.to_csv(args.csv)
+    
+    if (args.dump_ids):
+      ids = map(lambda loc: str(loc['external_id']), locations)
+      with open(args.dump_ids, 'w') as f:
+        f.write('\n'.join(ids))
 
 if __name__ == "__main__":
     main()
-
