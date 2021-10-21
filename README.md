@@ -43,7 +43,7 @@ Using the `--map <output-location>` command line argument, a simple Leaflet map 
 
 Multiple types of output can be generated. For example, the following command will search for Instagram locations, save the JSON list, a CSV file, and a map for viewing the locations visually.
 
-```python3 instagram-locations.py --session "3888090946%3AhdKd2fA8d72dqD%3A16" --lat 32.22 --lng -110.97 --json locs.json --csv locs.csv --map map.html```
+```python3 instagram-locations.py --session "<session-id-token>" --lat 32.22 --lng -110.97 --json locs.json --csv locs.csv --map map.html```
 
 ## Sample Usage with `instagram-scraper`
 The ID list generated with the `--ids` flag can be passed into `instagram-scraper` to pull down image metadata.
