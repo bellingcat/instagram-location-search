@@ -41,17 +41,17 @@ def get_fuzzy_locations(lat, lng, cookie, sigma=2):
     return locs
 
 # converts list of instagram locations into valid geojson
-def make_geojson(locs):
+def make_geojson(locations):
     features = []
 
-    for l in [l for l in locs if 'lng' in l]:
+    for location in [location for location in locations if 'lng' in location]:
         feature = {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [l["lng"], l["lat"]]
+                "coordinates": [location["lng"], location["lat"]]
                 },
-            "properties": l}
+            "properties": location}
         features.append(feature)
 
     return {"type": "FeatureCollection", "features": features}
