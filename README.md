@@ -8,9 +8,9 @@ This Python application requires `requests`, `numpy`, and `pandas` to be properl
 
 The following command will search for Instagram locations nearby the coordinates 32.22 N, 110.97 W (downtown Tucson, Arizona.) The list of locations is saved as a CSV file at "locs.csv".
 
-```python3 instagram-locations.py --session "<session-id-token>" --lat 32.22 --lng -110.97 --csv locs.csv```
+```python3 instagram-locations.py --cookie "<instagram-cookies>" --lat 32.22 --lng -110.97 --csv locs.csv```
 
-Note that this requires an Instagram session ID in order to work! See below for how to obtain one from your account.
+Note that this requires Instagram cookies in order to work! See below for how to obtain one from your account.
 
 ## Example usage with date
 
@@ -18,7 +18,7 @@ The following command will search for Instagram locations near Seattle's "Capito
 protests in early June, 2020. Not all location pages in the area will have posts relevant to the Zone, but some do. Open the
 resulting `map.html` file in your browser to view locations.
 
-```python3 instagram-locations.py --session "<session-id-token>" --lat 47.6164311 --lng -122.3203952 --map map.html --date 2020-06-09```
+```python3 instagram-locations.py --cookie "<instagram-cookies>" --lat 47.6164311 --lng -122.3203952 --map map.html --date 2020-06-09```
 
 When using the `--date` argument, links to Instagram location pages will be filtered to show posts created on this date or earlier.
 Instagram will usually first show a 3x3 grid of "Top Images and Videos" that are more recent, however once you scroll past that
@@ -43,7 +43,7 @@ Using the `--map <output-location>` command line argument, a simple Leaflet map 
 
 Multiple types of output can be generated. For example, the following command will search for Instagram locations, save the JSON list, a CSV file, and a map for viewing the locations visually.
 
-```python3 instagram-locations.py --session "<session-id-token>" --lat 32.22 --lng -110.97 --json locs.json --csv locs.csv --map map.html```
+```python3 instagram-locations.py --cookie "<instagram-cookie>" --lat 32.22 --lng -110.97 --json locs.json --csv locs.csv --map map.html```
 
 ## Sample Usage with `instagram-scraper`
 The ID list generated with the `--ids` flag can be passed into `instagram-scraper` to pull down image metadata.
@@ -53,7 +53,7 @@ The ID list generated with the `--ids` flag can be passed into `instagram-scrape
 
 First, get the proximal location IDs of your target location:
 ```sh
-python3 instagram-locations.py --session "<session-id-token>" --lat <lat> --lng <lng> --ids location_ids.txt
+python3 instagram-locations.py --cookies "<instagram-cookie>" --lat <lat> --lng <lng> --ids location_ids.txt
 ```
 
 Be sure to install `instagram-scraper`:
@@ -72,7 +72,9 @@ Now use `instagram-scraper` to pull down all the photos at those locations:
 instagram-scraper @creds.txt --filename @location_ids.txt --location --include-location --destination <output dir>
 ```
 
-## Getting an Instagram session ID
+## Getting Instagram cookies
+
+This now requires the entire cookie string, in the format of an HTTP request header. Details TK.
 
 __Important: an Instagram session ID should be treated like a password — it provides full access to the Instagram account. Using this session ID in multiple places or on multiple computers may trigger Instagram to invalidate all session IDs. Using this session ID for any purpose other than the official Instagram website or application may be a violation of the Instagram Terms of Service and could lead to account suspension.__
 
