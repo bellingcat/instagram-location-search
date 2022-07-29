@@ -87,6 +87,6 @@ __Important: an Instagram session ID should be treated like a password — it pr
 5. Right click on any item and click "Show Requests With This Cookie".
 6. Click on any request. In the "Headers" tab, scroll down to "Request Headers".
 
-![Finding the full cookie string](docs/cookies2.jpg)
+![Finding the full cookie string](docs/cookies2.png)
 
 7. Copy all text after "cookie: ". This is your cookie string. Replace `<instagram-cookies>` with this value when running `instagram-location-search`.
