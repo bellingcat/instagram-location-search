@@ -82,6 +82,11 @@ __Important: an Instagram session ID should be treated like a password — it pr
 2. Right click on the page and press "Inspect" to bring up the Chrome Developer Tools.
 3. Click the "Application" tab in the Developer Tools Box.
 4. Under "Cookies" select "https://www.instagram.com."
-5. The value next to "sessionid" is your Instagram session ID.
-
 ![Finding the Instagram cookie](docs/cookies.jpg)
+
+5. Right click on any item and click "Show Requests With This Cookie".
+6. Click on any request. In the "Headers" tab, scroll down to "Request Headers".
+
+![Finding the full cookie string](docs/cookies2.jpg)
+
+7. Copy all text after "cookie: ". This is your cookie string. Replace `<instagram-cookies>` with this value when running `instagram-location-search`.
