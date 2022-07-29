@@ -179,7 +179,7 @@ html_template = """<html>
 
 def main():
     parser = argparse.ArgumentParser(description="Get a list of Instagram locations near a lat/lng")
-    parser.add_argument("--session", action="store", dest="session")
+    parser.add_argument("--cookie", action="store", dest="cookie")
     parser.add_argument("--json", action="store", dest="output")
     parser.add_argument("--geojson", action="store", dest="geojson")
     parser.add_argument("--map", action="store", dest="map")
@@ -191,7 +191,7 @@ def main():
 
     args = parser.parse_args()
 
-    cookie = "sessionid=" + args.session
+    cookie = args.cookie
 
     date_var = ""
     if args.date is not None:
