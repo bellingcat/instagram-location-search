@@ -1,7 +1,7 @@
 # Instagram Location Search
 
 ## Installation
-This Python application can be installed from PyPI using pip, and can be built into a Docker image
+This Python application can be installed from PyPI using pip, and can also be built into a Docker image
 ### Install from PyPI
 `pip3 install instagram-location-search`
 
