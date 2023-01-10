@@ -1,14 +1,17 @@
 # Instagram Location Search
 
-## Prerequisites
+## Installation
+This Python application can be installed from PyPI using pip, and can be built into a Docker image
+### Install from PyPI
+`pip3 install instagram-location-search`
 
-This Python application requires `requests` to be properly installed. This can be done with `pip3 install requests`.
-
+### Build Docker image
+`docker build instagram-location-search .`
 ## Example usage
 
 The following command will search for Instagram locations nearby the coordinates 32.22 N, 110.97 W (downtown Tucson, Arizona.) The list of locations is saved as a CSV file at "locs.csv".
 
-```python3 instagram-locations.py --cookie "<instagram-cookies>" --lat 32.22 --lng -110.97 --csv locs.csv```
+```instagram_locations --cookie "<instagram-cookies>" --lat 32.22 --lng -110.97 --csv locs.csv```
 
 Note that this requires Instagram cookies in order to work! See below for how to obtain one from your account.
 
@@ -26,7 +29,7 @@ Using the `--map <output-location>` command line argument, a simple Leaflet map 
 
 Multiple types of output can be generated. For example, the following command will search for Instagram locations, save the JSON list, a CSV file, and a map for viewing the locations visually.
 
-```python3 instagram-locations.py --cookie "<instagram-cookie>" --lat 32.22 --lng -110.97 --json locs.json --csv locs.csv --map map.html```
+```instagram_locations --cookie "<instagram-cookie>" --lat 32.22 --lng -110.97 --json locs.json --csv locs.csv --map map.html```
 
 ## Sample Usage with `instagram-scraper`
 The ID list generated with the `--ids` flag can be passed into `instagram-scraper` to pull down image metadata.
@@ -36,7 +39,7 @@ The ID list generated with the `--ids` flag can be passed into `instagram-scrape
 
 First, get the proximal location IDs of your target location:
 ```sh
-python3 instagram-locations.py --cookies "<instagram-cookie>" --lat <lat> --lng <lng> --ids location_ids.txt
+instagram_locations --cookies "<instagram-cookie>" --lat <lat> --lng <lng> --ids location_ids.txt
 ```
 
 Be sure to install `instagram-scraper`:
