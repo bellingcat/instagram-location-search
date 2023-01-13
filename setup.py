@@ -23,7 +23,7 @@ setuptools.setup(
         ],
     entry_points={
         "console_scripts": [
-            "instagram_locations=instagram_locations.main:start",
+            "instagram_locations=instagram_locations.instagram_locations:main",
         ]
     },
 )
