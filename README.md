@@ -2,8 +2,8 @@
 
 ## Installation
 This Python application can be installed from PyPI using pip, and can also be built into a Docker image
-### Install from PyPI
-`pip3 install instagram-location-search`
+### Install with Pip
+`pip3 install git+https://github.com/bellingcat/instagram-location-search`
 
 ### Build Docker image
 `docker build instagram-location-search .`
