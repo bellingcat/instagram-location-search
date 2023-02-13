@@ -231,7 +231,4 @@ def main():
         ids = map(lambda loc: str(loc["external_id"]), locations)
         with open(args.dump_ids, "w") as f:
             f.write("\n".join(ids))
-
-
-if __name__ == "__main__":
-    main()
+            
