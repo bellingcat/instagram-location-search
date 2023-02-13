@@ -31,7 +31,7 @@ def get_instagram_locations(lat, lng, cookie):
     try:
         locations = response.json()
     except json.JSONDecodeError:
-        print(f"Failed to get location data for {lat_long}")
+        print(f"Failed to get location data for {lat_long}: please check you have a valid cookie")
         return []
 
     if not isinstance(locations, dict):
@@ -52,6 +52,7 @@ def get_instagram_locations_by_query(query):
 # in order to return additional results
 def get_fuzzy_locations(lat, lng, cookie, sigma=2):
     locs = get_instagram_locations(lat, lng, cookie)
+    print(locs)
     loc_ids = {v["external_id"] for v in locs if "external_id" in v}
 
     std_lat = pstdev([v["lat"] for v in locs if "lat" in v])
@@ -232,3 +233,6 @@ def main():
         with open(args.dump_ids, "w") as f:
             f.write("\n".join(ids))
             
+
+if __name__ == "__main__":
+    main()
