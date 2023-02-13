@@ -1,11 +1,12 @@
 import setuptools
-
+from instagram_locations.version import __version__
 with open("README.md", "r", encoding="utf-8") as file:
     long_description = file.read()
 
+
 setuptools.setup(
     name="instagram-location-search",
-    version="1.0.0",
+    version=__version__,
     author="Bellingcat",
     author_email="tech@bellingcat.com",
     packages=["instagram_locations"],
