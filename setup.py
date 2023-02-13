@@ -7,7 +7,7 @@ setuptools.setup(
     name="instagram-location-search",
     version="1.0.0",
     author="Bellingcat",
-    author_email="tech@bellingcat.com"
+    author_email="tech@bellingcat.com",
     packages=["instagram_locations"],
     description="Finds Instagram location IDs near a specified latitude and longitude.",
     long_description=long_description,
