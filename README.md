@@ -2,8 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/instagram-location-search.svg)](https://badge.fury.io/py/instagram-location-search)
 ## Installation
-This Python application can be installed from PyPI using pip, and can also be built into a Docker image
-### Install with Pip
+This Python application can be installed from [PyPI](https://pypi.org/project/instagram-location-search/) using pip:
 `pip install instagram-location-search`
 
 or the latest from the repo:
