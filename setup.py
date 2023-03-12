@@ -25,7 +25,7 @@ setuptools.setup(
         ],
     entry_points={
         "console_scripts": [
-            "instagram_locations=instagram_locations.instagram_locations:main",
+            "instagram-location-search=instagram_locations.instagram_locations:main",
         ]
     },
 )
