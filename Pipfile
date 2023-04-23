@@ -7,6 +7,8 @@ name = "pypi"
 requests = "*"
 numpy = "*"
 pandas = "*"
+selenium = "*"
+webdriver-manager = "*"
 
 [dev-packages]
 

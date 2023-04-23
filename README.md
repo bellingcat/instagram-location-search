@@ -61,6 +61,27 @@ instagram-scraper @creds.txt --filename @location_ids.txt --location --include-l
 
 ## Getting Instagram cookies
 
+### New flow
+Improved flow allows to get cookies trough pop-up browser window.
+In order to use this flow you need to omit '--cookie' param.
+
+__Important: an Instagram session ID should be treated like a password — it provides full access to the Instagram account. Using this session ID in multiple places or on multiple computers may trigger Instagram to invalidate all session IDs. Using this session ID for any purpose other than the official Instagram website or application may be a violation of the Instagram Terms of Service and could lead to account suspension.__
+
+1. Run command with --cookie param omited
+2. In opened Google Chrome instance, create new profile 
+![Creating new profile](docs/selenium1.png)
+3. Press continue without email
+![Continue without email](docs/selenium2.png)
+4. Enter name of the profile that would be liked to this account and create it
+![Creating an account](docs/selenium3.png)
+5. Click "Only allow essential cookies"
+![Only allow essential cookies](docs/selenium4.png)
+6. Log-in to Instagram. Browser will close automatically short after.
+![Log-in to instagram](docs/selenium5.png)
+
+Once set up you'll need only click on created profile in the following runs to use associated instagram profile.
+
+### Old flow
 This now requires the entire cookie string, in the format of an HTTP request header. Details TK.
 
 __Important: an Instagram session ID should be treated like a password — it provides full access to the Instagram account. Using this session ID in multiple places or on multiple computers may trigger Instagram to invalidate all session IDs. Using this session ID for any purpose other than the official Instagram website or application may be a violation of the Instagram Terms of Service and could lead to account suspension.__

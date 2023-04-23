@@ -7,6 +7,11 @@ from datetime import datetime, timezone
 from itertools import product
 from statistics import pstdev
 from string import Template
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromiumService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.utils import ChromeType
+from time import sleep
 
 import requests
 
@@ -113,6 +118,25 @@ def encode_date(date_str: str):
     return str(max_id_num)
 
 
+def get_insta_cookies():
+    """
+    Attempts to run selenium, provide user with the login form and extract cookies from page to be used in program.
+    Returns cookies formatted as name=value;name=value;...
+     """
+    options = webdriver.ChromeOptions()
+    options.add_argument(r"--user-data-dir=~/.instagram_location_searcher/data")
+    options.add_argument(r'--profile-directory=~/.instagram_location_searcher/profile')
+    driver = webdriver.Chrome(options=options, service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+    driver.get("https://www.instagram.com/")
+    # Check that there is cookie with name sessionid (mean we logged in)
+    cookies = driver.get_cookies()
+    while not any([cookie.get("name") == "sessionid" for cookie in cookies]):
+        sleep(1)
+        cookies = driver.get_cookies()
+    print("; ".join([f"{cookie['name']}={cookie['value'] }"for cookie in cookies]))
+    return "; ".join([f"{cookie['name']}={cookie['value'] }"for cookie in cookies])
+
+
 html_template = """<html>
   <head>
     <title>Instagram location visualizations</title>
@@ -193,6 +217,9 @@ def main():
     args = parser.parse_args()
 
     cookie = args.cookie
+    # If user run command without cookie we are trying to perform automated flow to acquire the cookie
+    if not cookie:
+        cookie = get_insta_cookies()
 
     date_var = ""
     if args.date is not None:
