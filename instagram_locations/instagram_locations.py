@@ -133,7 +133,6 @@ def get_insta_cookies():
     while not any([cookie.get("name") == "sessionid" for cookie in cookies]):
         sleep(1)
         cookies = driver.get_cookies()
-    print("; ".join([f"{cookie['name']}={cookie['value'] }"for cookie in cookies]))
     return "; ".join([f"{cookie['name']}={cookie['value'] }"for cookie in cookies])
 
 
