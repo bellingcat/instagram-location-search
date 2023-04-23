@@ -61,25 +61,28 @@ instagram-scraper @creds.txt --filename @location_ids.txt --location --include-l
 
 ## Getting Instagram cookies
 
-### New flow
-Improved flow allows to get cookies trough pop-up browser window.
-In order to use this flow you need to omit '--cookie' param.
+### Improved Tool Usage Process
 
-__Important: an Instagram session ID should be treated like a password — it provides full access to the Instagram account. Using this session ID in multiple places or on multiple computers may trigger Instagram to invalidate all session IDs. Using this session ID for any purpose other than the official Instagram website or application may be a violation of the Instagram Terms of Service and could lead to account suspension.__
+The updated process allows you to obtain cookies through a pop-up browser window. To use this new flow, simply omit the `--cookie` parameter when running the command.
 
-1. Run command with --cookie param omited
-2. In opened Google Chrome instance, create new profile 
-![Creating new profile](docs/selenium1.png)
-3. Press continue without email
-![Continue without email](docs/selenium2.png)
-4. Enter name of the profile that would be liked to this account and create it
-![Creating an account](docs/selenium3.png)
-5. Click "Only allow essential cookies"
-![Only allow essential cookies](docs/selenium4.png)
-6. Log-in to Instagram. Browser will close automatically short after.
-![Log-in to instagram](docs/selenium5.png)
+__Important: An Instagram session ID should be treated like a password, as it provides full access to your Instagram account. Using this session ID in multiple places or on multiple computers may cause Instagram to invalidate all session IDs. Using this session ID for any purpose other than the official Instagram website or application may violate the Instagram Terms of Service and could lead to account suspension.__
 
-Once set up you'll need only click on created profile in the following runs to use associated instagram profile.
+Follow these steps to use the improved tool usage process:
+
+1. Run the command without the `--cookie` parameter.
+2. In the opened Google Chrome instance, create a new profile.
+   ![Creating a new profile](docs/selenium1.png)
+3. Click "Continue without email".
+   ![Continue without email](docs/selenium2.png)
+4. Enter a name for the profile you'd like to link to instagram account, and click "Done".
+   ![Creating an account](docs/selenium3.png)
+5. Select "Only allow essential cookies".
+   ![Only allow essential cookies](docs/selenium4.png)
+6. Log in to your Instagram account. The browser will close automatically shortly afterward.
+   ![Log in to Instagram](docs/selenium5.png)
+
+Once you've completed the initial setup, you can simply click on the created profile in subsequent runs to use the associated Instagram account.
+
 
 ### Old flow
 This now requires the entire cookie string, in the format of an HTTP request header. Details TK.
