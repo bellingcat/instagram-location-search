@@ -247,7 +247,7 @@ def main():
         # leading empty string for 'id' column is for backward compatibility since that's the pandas behavior.
         fieldnames = ["", "name", "external_id", "external_id_source", "lat", "lng", "address", "minimum_age", "url"]
 
-        with open(args.csv, "w") as f:
+        with open(args.csv, "w", encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             for idx, row in enumerate(locations):
