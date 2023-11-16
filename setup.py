@@ -15,7 +15,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://www.bellingcat.com",
     license="MIT License",
-    install_requires=["requests", "instagram-scraper"],
+    install_requires=["requests", "numpy", "pandas", "selenium", "webdriver-manager"],
     classifiers=[
         'Intended Audience :: Information Technology',
         'License :: OSI Approved :: MIT License',
