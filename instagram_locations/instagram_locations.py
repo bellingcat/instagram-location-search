@@ -7,10 +7,6 @@ from datetime import datetime, timezone
 from itertools import product
 from statistics import pstdev
 from string import Template
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromiumService
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.utils import ChromeType
 from time import sleep
 
 import requests
@@ -119,6 +115,10 @@ def encode_date(date_str: str):
 
 
 def get_insta_cookies():
+    from selenium import webdriver
+    from selenium.webdriver.chrome.service import Service as ChromiumService
+    from webdriver_manager.chrome import ChromeDriverManager
+    from webdriver_manager.core.utils import ChromeType
     """
     Attempts to run selenium, provide user with the login form and extract cookies from page to be used in program.
     Returns cookies formatted as name=value;name=value;...
