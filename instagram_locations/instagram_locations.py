@@ -118,7 +118,7 @@ def get_insta_cookies():
     from selenium import webdriver
     from selenium.webdriver.chrome.service import Service as ChromiumService
     from webdriver_manager.chrome import ChromeDriverManager
-    from webdriver_manager.core.utils import ChromeType
+    from webdriver_manager.core.os_manager import ChromeType
     """
     Attempts to run selenium, provide user with the login form and extract cookies from page to be used in program.
     Returns cookies formatted as name=value;name=value;...
