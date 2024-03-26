@@ -10,7 +10,7 @@ from string import Template
 from time import sleep
 
 import requests
-
+import pathlib 
 
 # gets instagram "locations" around a particular lat/lng using internal API
 #   (requires session cookie for authentication)
@@ -123,9 +123,10 @@ def get_insta_cookies():
     Attempts to run selenium, provide user with the login form and extract cookies from page to be used in program.
     Returns cookies formatted as name=value;name=value;...
      """
+    path = str(pathlib.Path.home() / ".instagram_location_searcher" / "data")
     options = webdriver.ChromeOptions()
-    options.add_argument(r"--user-data-dir=~/.instagram_location_searcher/data")
-    options.add_argument(r'--profile-directory=~/.instagram_location_searcher/profile')
+    options.add_argument(f"user-data-dir={path}")
+    options.add_argument(f"profile-directory=profile")
     driver = webdriver.Chrome(options=options, service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.get("https://www.instagram.com/")
     # Check that there is cookie with name sessionid (mean we logged in)
