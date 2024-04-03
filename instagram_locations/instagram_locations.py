@@ -31,7 +31,7 @@ def get_instagram_locations(lat, lng, cookie):
 
     try:
         locations = response.json()
-    except json.JSONDecodeError:
+    except json.decoder.JSONDecodeError:
         print(f"Failed to get location data for {lat_long}: please check you have a valid cookie")
         return []
 
