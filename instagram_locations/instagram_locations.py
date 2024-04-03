@@ -116,17 +116,18 @@ def encode_date(date_str: str):
 
 def get_insta_cookies():
     from selenium import webdriver
-    from selenium.webdriver.chrome.service import Service as ChromiumService
-    from webdriver_manager.chrome import ChromeDriverManager
-    from webdriver_manager.core.os_manager import ChromeType
+    from selenium.webdriver.chrome.service import Service
+    import os.path
     """
     Attempts to run selenium, provide user with the login form and extract cookies from page to be used in program.
     Returns cookies formatted as name=value;name=value;...
      """
     options = webdriver.ChromeOptions()
-    options.add_argument(r"--user-data-dir=~/.instagram_location_searcher/data")
-    options.add_argument(r'--profile-directory=~/.instagram_location_searcher/profile')
-    driver = webdriver.Chrome(options=options, service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+    options.add_argument(r"--user-data-dir=" + os.path.expanduser("~/.instagram-location-search/chrome-data/"))
+    options.add_argument(r"--profile-directory=instagram-location-profile")
+
+    service = Service()
+    driver = webdriver.Chrome(options=options, service=service)
     driver.get("https://www.instagram.com/")
     # Check that there is cookie with name sessionid (mean we logged in)
     cookies = driver.get_cookies()
