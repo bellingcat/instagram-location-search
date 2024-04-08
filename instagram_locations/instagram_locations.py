@@ -51,13 +51,12 @@ def get_instagram_locations_by_query(query):
 
 # queries the instagram location API for several points around a central lat/lng
 # in order to return additional results
-def get_fuzzy_locations(lat, lng, cookie, sigma=2):
+def get_fuzzy_locations(lat, lng, cookie, sigma=0):
     locs = get_instagram_locations(lat, lng, cookie)
-    print(locs)
     loc_ids = {v["external_id"] for v in locs if "external_id" in v}
 
-    std_lat = pstdev([v["lat"] for v in locs if "lat" in v])
-    std_lng = pstdev([v["lng"] for v in locs if "lng" in v])
+    std_lat = pstdev([v["lat"] for v in locs if "lat" in v]) / 8.0
+    std_lng = pstdev([v["lng"] for v in locs if "lng" in v]) / 8.0
 
     # filter to avoid calling with both lat and lng deltas equal zero (which would duplicate the call
     # to obtain the initial loc)
@@ -213,8 +212,11 @@ def main():
     parser.add_argument("--lng", action="store", dest="lng")
     parser.add_argument("--date", action="store", dest="date")
     parser.add_argument("--ids", action="store", dest="dump_ids")
+    parser.add_argument("--more", action="store_true", dest="more")
 
     args = parser.parse_args()
+
+    sigma = 2 if args.more else 0
 
     cookie = args.cookie
     # If user run command without cookie we are trying to perform automated flow to acquire the cookie
@@ -225,7 +227,10 @@ def main():
     if args.date is not None:
         date_var = "?max_id=" + encode_date(args.date)
 
-    locations = get_fuzzy_locations(float(args.lat), float(args.lng), cookie)
+    locations = get_fuzzy_locations(float(args.lat), float(args.lng), cookie, sigma=sigma)
+
+    for i in locations:
+        i["url"] = f"https://www.instagram.com/explore/locations/{i['external_id']}{date_var}"
 
     if args.output:
         json.dump(locations, open(args.output, "w"))
@@ -242,9 +247,6 @@ def main():
         f.close()
 
     if args.csv:
-        for i in locations:
-            i["url"] = f"https://www.instagram.com/explore/locations/{i['external_id']}{date_var}"
-
         # leading empty string for 'id' column is for backward compatibility since that's the pandas behavior.
         fieldnames = ["", "name", "external_id", "external_id_source", "lat", "lng", "address", "minimum_age", "url"]
 
@@ -259,6 +261,9 @@ def main():
         ids = map(lambda loc: str(loc["external_id"]), locations)
         with open(args.dump_ids, "w") as f:
             f.write("\n".join(ids))
+
+    if not args.dump_ids and not args.csv and not args.map and not args.geojson and not args.output:
+        print('\n'.join([f"{loc['name']} ({loc['url']})" for loc in locations]))
             
 
 if __name__ == "__main__":
