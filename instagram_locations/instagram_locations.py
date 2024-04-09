@@ -34,6 +34,9 @@ def get_instagram_locations(lat, lng, cookie):
     except json.decoder.JSONDecodeError:
         print(f"Failed to get location data for {lat_long}: please check you have a valid cookie")
         return []
+    except requests.exceptions.JSONDecodeError:
+        print(f"Failed to get location data for {lat_long}: please check you have a valid cookie")
+        return []
 
     if not isinstance(locations, dict):
         print(f"Got invalid response for {lat_long}")
@@ -226,6 +229,9 @@ def main():
     date_var = ""
     if args.date is not None:
         date_var = "?max_id=" + encode_date(args.date)
+
+    if args.lat is None or args.lng is None:
+        sys.exit(1)
 
     locations = get_fuzzy_locations(float(args.lat), float(args.lng), cookie, sigma=sigma)
 
