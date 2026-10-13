@@ -9,7 +9,7 @@ or the latest from the repo:
 `pip install git+https://github.com/bellingcat/instagram-location-search`
 
 or, on Linux, with [OTinstaller](https://github.com/OSINTVerseHQ/OTinstaller), a third-party tool manager that installs the PyPI release into its own virtualenv (please report problems with it [on the OTinstaller tracker](https://github.com/OSINTVerseHQ/OTinstaller/issues)):
-`pipx install otinstaller && otinstaller install instagram-location-search`, then
+`pipx install otinstaller && otinstaller init && otinstaller install instagram-location-search`, then
 `otinstaller run instagram-location-search -- --cookie "<instagram-cookies>" --lat 32.22 --lng -110.97 --csv locs.csv`.
 OTinstaller saves the command it ran with the cookie value replaced by `***`.
 
