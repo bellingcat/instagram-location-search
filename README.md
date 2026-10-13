@@ -8,6 +8,11 @@ This Python application can be installed from [PyPI](https://pypi.org/project/in
 or the latest from the repo:
 `pip install git+https://github.com/bellingcat/instagram-location-search`
 
+or, on Linux, with [OTinstaller](https://github.com/OSINTVerseHQ/OTinstaller), a third-party tool manager that installs the PyPI release into its own virtualenv (please report problems with it [on the OTinstaller tracker](https://github.com/OSINTVerseHQ/OTinstaller/issues)):
+`pipx install otinstaller && otinstaller install instagram-location-search`, then
+`otinstaller run instagram-location-search -- --cookie "<instagram-cookies>" --lat 32.22 --lng -110.97 --csv locs.csv`.
+OTinstaller saves the command it ran with the cookie value replaced by `***`.
+
 ## Example usage
 
 The following command will search for Instagram locations nearby the coordinates 32.22 N, 110.97 W (downtown Tucson, Arizona.) The list of locations is saved as a CSV file at "locs.csv".
